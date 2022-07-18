@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "435535355142",
+    "project_id": "rehab-e680f",
+    "storage_bucket": "rehab-e680f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:435535355142:android:a5ac7741d1639023575287",
+        "android_client_info": {
+          "package_name": "com.example.rehab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "435535355142-4im92o75dpjm7v62sa7a703dujiv7i94.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9ss9qNcyeqHMuCN9k7i3CXD5ds9yoFYE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "435535355142-4im92o75dpjm7v62sa7a703dujiv7i94.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
