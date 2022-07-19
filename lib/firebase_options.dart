@@ -25,10 +25,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -52,6 +49,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '435535355142',
     projectId: 'rehab-e680f',
     authDomain: 'rehab-e680f.firebaseapp.com',
+    databaseURL: 'https://rehab-e680f-default-rtdb.firebaseio.com',
     storageBucket: 'rehab-e680f.appspot.com',
   );
 
@@ -60,6 +58,7 @@ class DefaultFirebaseOptions {
     appId: '1:435535355142:android:a5ac7741d1639023575287',
     messagingSenderId: '435535355142',
     projectId: 'rehab-e680f',
+    databaseURL: 'https://rehab-e680f-default-rtdb.firebaseio.com',
     storageBucket: 'rehab-e680f.appspot.com',
   );
 
@@ -68,9 +67,20 @@ class DefaultFirebaseOptions {
     appId: '1:435535355142:ios:f1850c7272212dc4575287',
     messagingSenderId: '435535355142',
     projectId: 'rehab-e680f',
+    databaseURL: 'https://rehab-e680f-default-rtdb.firebaseio.com',
     storageBucket: 'rehab-e680f.appspot.com',
-    iosClientId:
-        '435535355142-1u6p39kffd7q6u5lfhupaag47r59da3o.apps.googleusercontent.com',
+    iosClientId: '435535355142-1u6p39kffd7q6u5lfhupaag47r59da3o.apps.googleusercontent.com',
+    iosBundleId: 'com.example.rehab',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyBLThktxScbKxnSbtyii6Tv05CCl-nskTA',
+    appId: '1:435535355142:ios:f1850c7272212dc4575287',
+    messagingSenderId: '435535355142',
+    projectId: 'rehab-e680f',
+    databaseURL: 'https://rehab-e680f-default-rtdb.firebaseio.com',
+    storageBucket: 'rehab-e680f.appspot.com',
+    iosClientId: '435535355142-1u6p39kffd7q6u5lfhupaag47r59da3o.apps.googleusercontent.com',
     iosBundleId: 'com.example.rehab',
   );
 }

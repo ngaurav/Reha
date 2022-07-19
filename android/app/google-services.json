@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "435535355142",
+    "firebase_url": "https://rehab-e680f-default-rtdb.firebaseio.com",
     "project_id": "rehab-e680f",
     "storage_bucket": "rehab-e680f.appspot.com"
   },
@@ -29,6 +30,13 @@
             {
               "client_id": "435535355142-4im92o75dpjm7v62sa7a703dujiv7i94.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "435535355142-1u6p39kffd7q6u5lfhupaag47r59da3o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.rehab"
+              }
             }
           ]
         }
