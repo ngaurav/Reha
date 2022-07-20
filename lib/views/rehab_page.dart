@@ -30,7 +30,11 @@ class RehabPage extends StatelessWidget {
                 Container(
                   height: 200,
                   width: double.infinity,
-                  decoration: BoxDecoration(),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("img/knee.png"),
+                    ),
+                  ),
                 ),
               ],
             ),
