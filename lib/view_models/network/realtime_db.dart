@@ -24,10 +24,10 @@ class RealtimeDb {
       if (snapshot.exists) {
         Map<String, dynamic> snapshotValue =
             Map<String, dynamic>.from(snapshot.value as Map);
-        return snapshotValue[DateFormat('dd-MM-yyyy').format(DateTime.now())]
-                .map((i) => Session.fromJson(i))
-                .toList() ??
-            [];
+        final sessions =
+            snapshotValue[DateFormat('dd-MM-yyyy').format(DateTime.now())] ??
+                [];
+        return (sessions as List).map((i) => Session.fromJson(i)).toList();
       } else {
         return [];
       }

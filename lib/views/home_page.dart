@@ -14,12 +14,18 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: ListView.builder(
         itemCount: sessions.length,
-        itemBuilder: (context, index) => ListTile(
-          // screenSize: screenSize,
-          title: Text(sessions[index].name),
-          subtitle: Text(
-              controller.lst.contains(sessions[index]) ? "completed" : "start"),
-          onTap: controller.lst.contains(sessions[index]) ? () => {} : null,
+        itemBuilder: (context, index) => GetBuilder<SessionActivityVM>(
+          // specify type as Controller
+          init: SessionActivityVM(), // intialize with the Controller
+          builder: (value) => ListTile(
+            // screenSize: screenSize,
+            title: Text(sessions[index].name),
+            subtitle: Text(
+                value.lst.contains(sessions[index]) ? "completed" : "start"),
+            onTap: controller.lst.contains(sessions[index])
+                ? null
+                : () => controller.add(),
+          ),
         ),
       ),
       floatingActionButton:
