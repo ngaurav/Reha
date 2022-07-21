@@ -19,6 +19,32 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: [
           Padding(
+            padding: const EdgeInsets.only(left: 8.0, top: 8.0),
+            child: Container(
+              height: 100,
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Good Morning",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 40,
+                    ),
+                  ),
+                  Text("Jane",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 40,
+                      )),
+                ],
+              ),
+            ),
+          ),
+          Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
               height: 150,
@@ -45,7 +71,7 @@ class HomePage extends StatelessWidget {
                               init: SessionActivityVM(),
                               builder: (value) {
                                 return Text(
-                                  "${value.lst.length / sessions.length * 100} %",
+                                  "${value.lst.length / sessions.length * 100}%",
                                   style: TextStyle(
                                       color: Colors.blue[800],
                                       fontSize: 25,
@@ -61,7 +87,8 @@ class HomePage extends StatelessWidget {
                               padding: const EdgeInsets.all(8.0),
                               child: LinearProgressIndicator(
                                 minHeight: 8,
-                                value: value.lst.length / sessions.length,
+                                value: (value.lst.length / sessions.length),
+
                                 // value: controller.value,
                                 semanticsLabel: 'Linear progress indicator',
                               ),
@@ -208,11 +235,6 @@ class HomePage extends StatelessWidget {
                                                   border: Border.all(
                                                       width: 1,
                                                       color: Colors.green)),
-                                              // child: Icon(
-                                              //   Icons.hiking_outlined,
-                                              //   color: Colors.pink[100],
-                                              //   size: 100,
-                                              // ),
                                               child: Image(
                                                 image: AssetImage(
                                                     "assets/exercise.jpg"),
