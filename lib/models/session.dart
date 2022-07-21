@@ -11,7 +11,7 @@ class Session extends Equatable {
   factory Session.fromJson(Map<String, dynamic> json) {
     return Session(
       id: json['id'],
-      name: 'name',
+      name: json['name'],
     );
   }
 

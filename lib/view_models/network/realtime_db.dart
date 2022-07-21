@@ -13,12 +13,17 @@ class RealtimeDb {
           .ref("sessions")
           .child(DateFormat('dd-MM-yyyy').format(t));
 
-      Map<int, dynamic> ret = {};
-      sessions.forEach((key, values) {
-        ret[key.microsecondsSinceEpoch] = values.toJson();
-      });
-      ret[t.microsecondsSinceEpoch] = session.toJson();
-      await databaseReference.set(ret);
+      // Map<int, dynamic> ret = {};
+      // sessions.forEach((key, values) {
+      //   if (DateFormat("dd-MM-yyyy").format(key) ==
+      //       DateFormat("dd-MM-yyyy").format(DateTime.now())) {
+      //     ret[key.microsecondsSinceEpoch] = values.toJson();
+      //   }
+      // });
+      // ret[t.microsecondsSinceEpoch] = session.toJson();
+      await databaseReference
+          .child(t.microsecondsSinceEpoch.toString())
+          .set(session.toJson());
       return t;
     } catch (e) {
       rethrow;
@@ -33,13 +38,15 @@ class RealtimeDb {
       if (snapshot.exists) {
         Map<String, dynamic> snapshotValue =
             Map<String, dynamic>.from(snapshot.value as Map);
-        final sessions =
-            snapshotValue[DateFormat('dd-MM-yyyy').format(DateTime.now())] ??
-                [];
+        // final sessions =
+        //     snapshotValue[DateFormat('dd-MM-yyyy').format(DateTime.now())] ??
+        //         [];
         Map<DateTime, Session> ret = {};
-        sessions.forEach((key, values) {
-          ret[DateTime.fromMicrosecondsSinceEpoch(int.parse(key))] =
-              Session.fromJson(values);
+        snapshotValue.forEach((key, values) {
+          values.forEach((key, values) {
+            ret[DateTime.fromMicrosecondsSinceEpoch(int.parse(key))] =
+                Session.fromJson(values);
+          });
         });
         return ret;
       } else {
