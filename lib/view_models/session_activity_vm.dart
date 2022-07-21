@@ -5,6 +5,7 @@ import 'network/realtime_db.dart';
 
 class SessionActivityVM extends GetxController {
   Map<DateTime, Session> lst = {};
+  Map<Session, DateTime> rev = {};
   bool loaded = false;
 
   @override
@@ -12,6 +13,10 @@ class SessionActivityVM extends GetxController {
     super.onInit();
     try {
       lst = await RealtimeDb.read();
+
+      lst.forEach((key, values) {
+        rev[values] = key;
+      });
       loaded = true;
       update();
     } on Exception catch (e) {

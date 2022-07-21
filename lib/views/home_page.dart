@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:rehab/models/session.dart';
 import 'package:rehab/themes/app_size.dart';
 import 'package:rehab/themes/app_theme.dart';
@@ -18,32 +19,6 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0, top: 8.0),
-            child: Container(
-              height: 100,
-              width: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Good Morning",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 40,
-                    ),
-                  ),
-                  Text("Jane",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 40,
-                      )),
-                ],
-              ),
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
@@ -71,7 +46,7 @@ class HomePage extends StatelessWidget {
                               init: SessionActivityVM(),
                               builder: (value) {
                                 return Text(
-                                  "${value.lst.length / sessions.length * 100}%",
+                                  "${(value.rev.length / sessions.length * 100).toStringAsFixed(2)} %",
                                   style: TextStyle(
                                       color: Colors.blue[800],
                                       fontSize: 25,
@@ -87,73 +62,81 @@ class HomePage extends StatelessWidget {
                               padding: const EdgeInsets.all(8.0),
                               child: LinearProgressIndicator(
                                 minHeight: 8,
-                                value: (value.lst.length / sessions.length),
-
+                                value: value.rev.length / sessions.length,
                                 // value: controller.value,
                                 semanticsLabel: 'Linear progress indicator',
                               ),
                             );
                           }),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.all(5),
-                                padding: EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    border: Border.all(
-                                        width: 1, color: Colors.white)),
-                                child: Icon(
-                                  Icons.check_box,
-                                  color: Colors.green,
-                                  size: 35,
+                      GetBuilder<SessionActivityVM>(
+                          init: SessionActivityVM(),
+                          builder: (value) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Builder(builder: (context) {
+                                  return Row(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.all(5),
+                                        padding: EdgeInsets.all(5),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                            border: Border.all(
+                                                width: 1, color: Colors.white)),
+                                        child: Icon(
+                                          Icons.check_box,
+                                          color: Colors.green,
+                                          size: 35,
+                                        ),
+                                      ),
+                                      Column(
+                                        children: [
+                                          Text("Completed"),
+                                          Text(
+                                            '${value.rev.length} Sessions',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  );
+                                }),
+                                Row(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.all(5),
+                                      padding: EdgeInsets.all(5),
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          border: Border.all(
+                                              width: 1, color: Colors.white)),
+                                      child: Icon(
+                                        Icons.arrow_circle_right,
+                                        color: Colors.blue,
+                                        size: 35,
+                                      ),
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text('Pending'),
+                                        Text(
+                                          '${sessions.length - value.rev.length} Sessions',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              Column(
-                                children: [
-                                  Text("Completed"),
-                                  Text(
-                                    '2 Sessions',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.all(5),
-                                padding: EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    border: Border.all(
-                                        width: 1, color: Colors.white)),
-                                child: Icon(
-                                  Icons.arrow_circle_right,
-                                  color: Colors.blue,
-                                  size: 35,
-                                ),
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('Pending'),
-                                  Text(
-                                    '2 Sessions',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                              ],
+                            );
+                          }),
                     ],
                   ),
                 ),
@@ -224,6 +207,10 @@ class HomePage extends StatelessWidget {
                                             current:
                                                 controller.lst.values.last ==
                                                     sessions[index],
+                                            time: DateFormat('h:mm a').format(
+                                                controller
+                                                        .rev[sessions[index]] ??
+                                                    DateTime.now()),
                                           ),
                                           Container(
                                               margin: EdgeInsets.all(5),
@@ -235,6 +222,11 @@ class HomePage extends StatelessWidget {
                                                   border: Border.all(
                                                       width: 1,
                                                       color: Colors.green)),
+                                              // child: Icon(
+                                              //   Icons.hiking_outlined,
+                                              //   color: Colors.pink[100],
+                                              //   size: 100,
+                                              // ),
                                               child: Image(
                                                 image: AssetImage(
                                                     "assets/exercise.jpg"),
@@ -281,11 +273,13 @@ class CardContent extends StatelessWidget {
   final Session session;
   final bool done;
   final bool current;
+  final String time;
   const CardContent({
     Key? key,
     required this.done,
     required this.current,
     required this.session,
+    this.time = "",
   }) : super(key: key);
 
   @override
@@ -309,29 +303,33 @@ class CardContent extends StatelessWidget {
             current ? "Enter Pain Score" : "Performed at",
             style: Theme.of(context).textTheme.subtitle2,
           ),
-        if (current || !done)
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(Dimens.marginXS),
-                decoration: const BoxDecoration(
-                  borderRadius: Dimens.largeBorder,
-                  color: Colors.blue,
-                ),
-                child: const Icon(
-                  Icons.play_arrow_rounded,
-                ),
+        (current || !done)
+            ? Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(Dimens.marginXS),
+                    decoration: const BoxDecoration(
+                      borderRadius: Dimens.largeBorder,
+                      color: Colors.blue,
+                    ),
+                    child: const Icon(
+                      Icons.play_arrow_rounded,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: Dimens.marginS,
+                  ),
+                  Pill(
+                    text: current ? "Retry" : "Start",
+                    done: false,
+                    current: false,
+                  ),
+                ],
+              )
+            : Text(
+                time,
+                style: Theme.of(context).textTheme.subtitle1,
               ),
-              const SizedBox(
-                width: Dimens.marginS,
-              ),
-              Pill(
-                text: current ? "Retry" : "Start",
-                done: false,
-                current: false,
-              ),
-            ],
-          ),
       ],
     );
   }
