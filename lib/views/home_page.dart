@@ -16,95 +16,127 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(SessionActivityVM());
 
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0, top: 8.0),
-              child: Container(
-                height: 100,
-                width: double.infinity,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Good Morning",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 40,
-                      ),
-                    ),
-                    Text("Jane",
+    return SafeArea(
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0, top: 8.0),
+                child: Container(
+                  height: 100,
+                  width: double.infinity,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Good Morning",
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
                           fontSize: 40,
-                        )),
-                  ],
+                        ),
+                      ),
+                      Text("Jane",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 40,
+                          )),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: 150,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Card(
-                  elevation: 10,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Today's Progress",
-                              style: TextStyle(
-                                color: Colors.grey[700],
-                                fontSize: 30,
-                              ),
-                            ),
-                            GetBuilder<SessionActivityVM>(
-                                init: SessionActivityVM(),
-                                builder: (value) {
-                                  return Text(
-                                    "${(value.rev.length / sessions.length * 100).toStringAsFixed(2)} %",
-                                    style: TextStyle(
-                                        color: Colors.blue[800],
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.bold),
-                                  );
-                                }),
-                          ],
-                        ),
-                        GetBuilder<SessionActivityVM>(
-                            init: SessionActivityVM(),
-                            builder: (value) {
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: LinearProgressIndicator(
-                                  minHeight: 8,
-                                  value: value.rev.length / sessions.length,
-                                  // value: controller.value,
-                                  semanticsLabel: 'Linear progress indicator',
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 150,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Card(
+                    elevation: 10,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Today's Progress",
+                                style: TextStyle(
+                                  color: Colors.grey[700],
+                                  fontSize: 30,
                                 ),
-                              );
-                            }),
-                        GetBuilder<SessionActivityVM>(
-                            init: SessionActivityVM(),
-                            builder: (value) {
-                              return Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Builder(builder: (context) {
-                                    return Row(
+                              ),
+                              GetBuilder<SessionActivityVM>(
+                                  init: SessionActivityVM(),
+                                  builder: (value) {
+                                    return Text(
+                                      "${(value.rev.length / sessions.length * 100).toStringAsFixed(2)} %",
+                                      style: TextStyle(
+                                          color: Colors.blue[800],
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold),
+                                    );
+                                  }),
+                            ],
+                          ),
+                          GetBuilder<SessionActivityVM>(
+                              init: SessionActivityVM(),
+                              builder: (value) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: LinearProgressIndicator(
+                                    minHeight: 8,
+                                    value: value.rev.length / sessions.length,
+                                    // value: controller.value,
+                                    semanticsLabel: 'Linear progress indicator',
+                                  ),
+                                );
+                              }),
+                          GetBuilder<SessionActivityVM>(
+                              init: SessionActivityVM(),
+                              builder: (value) {
+                                return Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Builder(builder: (context) {
+                                      return Row(
+                                        children: [
+                                          Container(
+                                            margin: EdgeInsets.all(5),
+                                            padding: EdgeInsets.all(5),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                border: Border.all(
+                                                    width: 1,
+                                                    color: Colors.white)),
+                                            child: Icon(
+                                              Icons.check_box,
+                                              color: Colors.green,
+                                              size: 35,
+                                            ),
+                                          ),
+                                          Column(
+                                            children: [
+                                              Text("Completed"),
+                                              Text(
+                                                '${value.rev.length} Sessions',
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      );
+                                    }),
+                                    Row(
                                       children: [
                                         Container(
                                           margin: EdgeInsets.all(5),
@@ -116,198 +148,183 @@ class HomePage extends StatelessWidget {
                                                   width: 1,
                                                   color: Colors.white)),
                                           child: Icon(
-                                            Icons.check_box,
-                                            color: Colors.green,
+                                            Icons.arrow_circle_right,
+                                            color: Colors.blue,
                                             size: 35,
                                           ),
                                         ),
                                         Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
-                                            Text("Completed"),
+                                            Text('Pending'),
                                             Text(
-                                              '${value.rev.length} Sessions',
+                                              '${sessions.length - value.rev.length} Sessions',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold),
                                             ),
                                           ],
                                         ),
                                       ],
-                                    );
-                                  }),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.all(5),
-                                        padding: EdgeInsets.all(5),
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(100),
-                                            border: Border.all(
-                                                width: 1, color: Colors.white)),
-                                        child: Icon(
-                                          Icons.arrow_circle_right,
-                                          color: Colors.blue,
-                                          size: 35,
-                                        ),
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text('Pending'),
-                                          Text(
-                                            '${sessions.length - value.rev.length} Sessions',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              );
-                            }),
-                      ],
+                                    ),
+                                  ],
+                                );
+                              }),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: sessions.length,
-                itemBuilder: (context, index) => GetBuilder<SessionActivityVM>(
-                    init: SessionActivityVM(),
-                    builder: (value) {
-                      var clr = controller.rev.keys.contains(sessions[index])
-                          ? Colors.blue
-                          : Colors.grey;
-                      return !value.loaded
-                          ? const SizedBox(
-                              height: 0,
-                            )
-                          : Row(
-                              children: [
-                                Column(
-                                  children: [
-                                    Container(
-                                      width: 2,
-                                      height: 75,
-                                      color: index != 0
-                                          ? clr
-                                          : Theme.of(context).canvasColor,
-                                    ),
-                                    Icon(
-                                      controller.rev.keys
-                                              .contains(sessions[index])
-                                          ? Icons.check_circle
-                                          : Icons.circle_outlined,
-                                      color: clr,
-                                    ),
-                                    Container(
-                                      width: 2,
-                                      height: 75,
-                                      color: index != sessions.length - 1
-                                          ? (controller.rev.length == index
-                                              ? Colors.grey
-                                              : clr)
-                                          : Theme.of(context).canvasColor,
-                                    ),
-                                  ],
-                                ),
-                                Expanded(
-                                  child: GetBuilder<SessionActivityVM>(
-                                      init: SessionActivityVM(),
-                                      builder: (value) {
-                                        return GestureDetector(
-                                          onTap: index != value.rev.length
-                                              ? null
-                                              : () => controller.add(),
-                                          child: Card(
-                                            elevation: index == value.rev.length
-                                                ? 8.0
-                                                : 1.0,
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 20.0, right: 5),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  CardContent(
-                                                    session: sessions[index],
-                                                    done: controller.rev.keys
-                                                        .contains(
-                                                            sessions[index]),
-                                                    current:
-                                                        controller.rev.length ==
-                                                            index,
-                                                    time: DateFormat('h:mm a')
-                                                        .format(controller.rev[
-                                                                sessions[
-                                                                    index]] ??
-                                                            DateTime.now()),
-                                                    next: index ==
-                                                        value.rev.length,
-                                                  ),
-                                                  Container(
-                                                      margin: EdgeInsets.all(5),
-                                                      padding:
-                                                          EdgeInsets.all(5),
-                                                      decoration: BoxDecoration(
-                                                          color: Colors.white54,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(12),
-                                                          border: Border.all(
-                                                              width: 1,
-                                                              color: Colors
-                                                                  .green)),
-                                                      // child: Icon(
-                                                      //   Icons.hiking_outlined,
-                                                      //   color: Colors.pink[100],
-                                                      //   size: 100,
-                                                      // ),
-                                                      child: Image(
-                                                        image: AssetImage(
-                                                            "assets/exercise.jpg"),
-                                                        height: 140,
-                                                      )),
-                                                ],
+              Expanded(
+                child: ListView.builder(
+                  itemCount: sessions.length,
+                  itemBuilder: (context, index) => GetBuilder<
+                          SessionActivityVM>(
+                      init: SessionActivityVM(),
+                      builder: (value) {
+                        var clr = controller.rev.keys.contains(sessions[index])
+                            ? Colors.blue
+                            : Colors.grey;
+                        return !value.loaded
+                            ? const SizedBox(
+                                height: 0,
+                              )
+                            : Row(
+                                children: [
+                                  Column(
+                                    children: [
+                                      Container(
+                                        width: 2,
+                                        height: 75,
+                                        color: index != 0
+                                            ? clr
+                                            : Theme.of(context).canvasColor,
+                                      ),
+                                      Icon(
+                                        controller.rev.keys
+                                                .contains(sessions[index])
+                                            ? Icons.check_circle
+                                            : Icons.circle_outlined,
+                                        color: clr,
+                                      ),
+                                      Container(
+                                        width: 2,
+                                        height: 75,
+                                        color: index != sessions.length - 1
+                                            ? (controller.rev.length == index
+                                                ? Colors.grey
+                                                : clr)
+                                            : Theme.of(context).canvasColor,
+                                      ),
+                                    ],
+                                  ),
+                                  Expanded(
+                                    child: GetBuilder<SessionActivityVM>(
+                                        init: SessionActivityVM(),
+                                        builder: (value) {
+                                          return GestureDetector(
+                                            onTap: index != value.rev.length
+                                                ? null
+                                                : () => controller.add(),
+                                            child: Card(
+                                              elevation:
+                                                  index == value.rev.length
+                                                      ? 8.0
+                                                      : 1.0,
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 10.0, right: 5),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    CardContent(
+                                                      session: sessions[index],
+                                                      done: controller.rev.keys
+                                                          .contains(
+                                                              sessions[index]),
+                                                      current: controller
+                                                                  .rev.length -
+                                                              1 ==
+                                                          index,
+                                                      time: DateFormat('h:mm a')
+                                                          .format(controller
+                                                                      .rev[
+                                                                  sessions[
+                                                                      index]] ??
+                                                              DateTime.now()),
+                                                      next: index ==
+                                                          value.rev.length,
+                                                    ),
+                                                    Container(
+                                                        margin:
+                                                            EdgeInsets.all(5),
+                                                        padding:
+                                                            EdgeInsets.all(5),
+                                                        decoration: BoxDecoration(
+                                                            color:
+                                                                Colors.white54,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        12),
+                                                            border: Border.all(
+                                                                width: 1,
+                                                                color: Colors
+                                                                    .green)),
+                                                        // child: Icon(
+                                                        //   Icons.hiking_outlined,
+                                                        //   color: Colors.pink[100],
+                                                        //   size: 100,
+                                                        // ),
+                                                        child: Image(
+                                                          image: AssetImage(
+                                                              "assets/exercise.jpg"),
+                                                          height: 140,
+                                                        )),
+                                                  ],
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        );
-                                      }),
-                                ),
-                              ],
-                            );
-                    }),
+                                          );
+                                        }),
+                                  ),
+                                ],
+                              );
+                      }),
+                ),
               ),
-            ),
-          ],
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: SizedBox(
-        height: 60,
-        width: 300,
-        child: FloatingActionButton.extended(
-          backgroundColor: Colors.blue[800],
-          icon: const Icon(
-            Icons.play_arrow_rounded,
-            size: Dimens.iconSize,
+            ],
           ),
-          label: Text(
-            'Start Session',
-            style: Theme.of(context)
-                .textTheme
-                .headline3
-                ?.copyWith(color: Colors.white),
-          ),
-          onPressed: () => controller.add(),
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: GetBuilder<SessionActivityVM>(
+            init: SessionActivityVM(),
+            builder: (value) {
+              return SizedBox(
+                height: 60,
+                width: 300,
+                child: FloatingActionButton.extended(
+                  backgroundColor: Colors.blue[800],
+                  icon: const Icon(
+                    Icons.play_arrow_rounded,
+                    size: Dimens.iconSize,
+                  ),
+                  label: Text(
+                    'Start Session',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline3
+                        ?.copyWith(color: Colors.white),
+                  ),
+                  onPressed: value.rev.length == sessions.length
+                      ? null
+                      : () => controller.add(),
+                ),
+              );
+            }),
       ),
     );
   }

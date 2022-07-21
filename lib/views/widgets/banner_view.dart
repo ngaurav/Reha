@@ -57,7 +57,7 @@ class BannerView extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(
-                              vertical: Dimens.marginM),
+                              vertical: Dimens.marginXS),
                           child: Container(
                             padding: const EdgeInsets.all(Dimens.marginM),
                             color: const Color.fromARGB(255, 216, 248, 135),
