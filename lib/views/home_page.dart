@@ -14,6 +14,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SessionActivityVM());
+
     return Scaffold(
       body: Column(
         children: [
@@ -40,24 +41,32 @@ class HomePage extends StatelessWidget {
                               fontSize: 30,
                             ),
                           ),
-                          Text(
-                            "50%",
-                            style: TextStyle(
-                                color: Colors.blue[800],
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold),
-                          ),
+                          GetBuilder<SessionActivityVM>(
+                              init: SessionActivityVM(),
+                              builder: (value) {
+                                return Text(
+                                  "${value.lst.length / sessions.length * 100} %",
+                                  style: TextStyle(
+                                      color: Colors.blue[800],
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold),
+                                );
+                              }),
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: LinearProgressIndicator(
-                          minHeight: 8,
-                          value: 0.5,
-                          // value: controller.value,
-                          semanticsLabel: 'Linear progress indicator',
-                        ),
-                      ),
+                      GetBuilder<SessionActivityVM>(
+                          init: SessionActivityVM(),
+                          builder: (value) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: LinearProgressIndicator(
+                                minHeight: 8,
+                                value: value.lst.length / sessions.length,
+                                // value: controller.value,
+                                semanticsLabel: 'Linear progress indicator',
+                              ),
+                            );
+                          }),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -128,52 +137,96 @@ class HomePage extends StatelessWidget {
             child: ListView.builder(
               itemCount: sessions.length,
               itemBuilder: (context, index) => GetBuilder<SessionActivityVM>(
-                init: SessionActivityVM(),
-                builder: (value) => !value.loaded
-                    ? const SizedBox(
-                        height: 0,
-                      )
-                    : GestureDetector(
-                        onTap: controller.lst.values.contains(sessions[index])
-                            ? null
-                            : () => controller.add(),
-                        child: Card(
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 20.0, right: 5),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                CardContent(
-                                  session: sessions[index],
-                                  done: controller.lst.values
-                                      .contains(sessions[index]),
-                                  current: controller.lst.values.last ==
-                                      sessions[index],
+                  init: SessionActivityVM(),
+                  builder: (value) {
+                    var clr = controller.lst.values.contains(sessions[index])
+                        ? Colors.blue
+                        : Colors.grey;
+                    return !value.loaded
+                        ? const SizedBox(
+                            height: 0,
+                          )
+                        : Row(
+                            children: [
+                              Column(
+                                children: [
+                                  Container(
+                                    width: 2,
+                                    height: 75,
+                                    color: index != 0
+                                        ? clr
+                                        : Theme.of(context).canvasColor,
+                                  ),
+                                  Icon(
+                                    controller.lst.values
+                                            .contains(sessions[index])
+                                        ? Icons.check_circle
+                                        : Icons.circle_outlined,
+                                    color: clr,
+                                  ),
+                                  Container(
+                                    width: 2,
+                                    height: 75,
+                                    color: index != sessions.length - 1
+                                        ? (controller.lst.values.last ==
+                                                sessions[index]
+                                            ? Colors.grey
+                                            : clr)
+                                        : Theme.of(context).canvasColor,
+                                  ),
+                                ],
+                              ),
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: controller.lst.values
+                                          .contains(sessions[index])
+                                      ? null
+                                      : () => controller.add(),
+                                  child: Card(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 20.0, right: 5),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          CardContent(
+                                            session: sessions[index],
+                                            done: controller.lst.values
+                                                .contains(sessions[index]),
+                                            current:
+                                                controller.lst.values.last ==
+                                                    sessions[index],
+                                          ),
+                                          Container(
+                                              margin: EdgeInsets.all(5),
+                                              padding: EdgeInsets.all(5),
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white54,
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                  border: Border.all(
+                                                      width: 1,
+                                                      color: Colors.green)),
+                                              // child: Icon(
+                                              //   Icons.hiking_outlined,
+                                              //   color: Colors.pink[100],
+                                              //   size: 100,
+                                              // ),
+                                              child: Image(
+                                                image: AssetImage(
+                                                    "assets/exercise.jpg"),
+                                                height: 140,
+                                              )),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                                Container(
-                                    margin: EdgeInsets.all(5),
-                                    padding: EdgeInsets.all(5),
-                                    decoration: BoxDecoration(
-                                        color: Colors.white54,
-                                        borderRadius: BorderRadius.circular(12),
-                                        border: Border.all(
-                                            width: 1, color: Colors.green)),
-                                    // child: Icon(
-                                    //   Icons.hiking_outlined,
-                                    //   color: Colors.pink[100],
-                                    //   size: 100,
-                                    // ),
-                                    child: Image(
-                                      image: AssetImage("assets/exercise.jpg"),
-                                      height: 100,
-                                    )),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-              ),
+                              ),
+                            ],
+                          );
+                  }),
             ),
           ),
         ],
