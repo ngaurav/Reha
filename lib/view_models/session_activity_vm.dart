@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:rehab/models/session.dart';
 
 import 'network/realtime_db.dart';
@@ -15,7 +16,8 @@ class SessionActivityVM extends GetxController {
       lst = await RealtimeDb.read();
 
       lst.forEach((key, values) {
-        rev[values] = key;
+        if (DateFormat("dd-MM-yyyy").format(key) ==
+            DateFormat("dd-MM-yyyy").format(DateTime.now())) rev[values] = key;
       });
       loaded = true;
       update();
@@ -32,6 +34,10 @@ class SessionActivityVM extends GetxController {
       var t =
           await RealtimeDb.write(sessions: lst, session: sessions[lst.length]);
       lst[t] = sessions[lst.length];
+      lst.forEach((key, values) {
+        if (DateFormat("dd-MM-yyyy").format(key) ==
+            DateFormat("dd-MM-yyyy").format(DateTime.now())) rev[values] = key;
+      });
       update();
     } on Exception catch (e) {
       Get.showSnackbar(GetSnackBar(

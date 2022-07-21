@@ -179,7 +179,7 @@ class HomePage extends StatelessWidget {
                 itemBuilder: (context, index) => GetBuilder<SessionActivityVM>(
                     init: SessionActivityVM(),
                     builder: (value) {
-                      var clr = controller.lst.values.contains(sessions[index])
+                      var clr = controller.rev.keys.contains(sessions[index])
                           ? Colors.blue
                           : Colors.grey;
                       return !value.loaded
@@ -198,7 +198,7 @@ class HomePage extends StatelessWidget {
                                           : Theme.of(context).canvasColor,
                                     ),
                                     Icon(
-                                      controller.lst.values
+                                      controller.rev.keys
                                               .contains(sessions[index])
                                           ? Icons.check_circle
                                           : Icons.circle_outlined,
@@ -208,8 +208,7 @@ class HomePage extends StatelessWidget {
                                       width: 2,
                                       height: 75,
                                       color: index != sessions.length - 1
-                                          ? (controller.lst.values.last ==
-                                                  sessions[index]
+                                          ? (controller.rev.length == index
                                               ? Colors.grey
                                               : clr)
                                           : Theme.of(context).canvasColor,
@@ -238,12 +237,12 @@ class HomePage extends StatelessWidget {
                                                 children: [
                                                   CardContent(
                                                     session: sessions[index],
-                                                    done: controller.lst.values
+                                                    done: controller.rev.keys
                                                         .contains(
                                                             sessions[index]),
-                                                    current: controller
-                                                            .lst.values.last ==
-                                                        sessions[index],
+                                                    current:
+                                                        controller.rev.length ==
+                                                            index,
                                                     time: DateFormat('h:mm a')
                                                         .format(controller.rev[
                                                                 sessions[

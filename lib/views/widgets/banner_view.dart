@@ -36,7 +36,6 @@ class BannerView extends StatelessWidget {
               borderRadius: Dimens.border,
               child: Stack(
                 children: [
-                  Image.network(picture),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: Dimens.marginXL, vertical: Dimens.marginXL),
