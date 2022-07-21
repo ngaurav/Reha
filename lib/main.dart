@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:rehab/views/home_page.dart';
+import 'package:rehab/themes/app_theme.dart';
 import 'package:rehab/views/main_page.dart';
 
 import 'firebase_options.dart';
@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        textTheme: AppTheme.textTheme,
       ),
       home: const MainPage(),
     );

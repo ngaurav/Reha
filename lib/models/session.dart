@@ -1,4 +1,3 @@
-// import 'package:equatable/equatable.dart';
 import 'package:equatable/equatable.dart';
 
 class Session extends Equatable {
@@ -47,4 +46,15 @@ final sessions = [
   const Session(id: 17, name: "Session 17"),
   const Session(id: 18, name: "Session 18"),
   const Session(id: 19, name: "Session 19"),
+  const Session(id: 20, name: "Session 20"),
+  const Session(id: 21, name: "Session 21"),
+  const Session(id: 22, name: "Session 22"),
+  const Session(id: 23, name: "Session 23"),
+  const Session(id: 24, name: "Session 24"),
+  const Session(id: 25, name: "Session 25"),
+  const Session(id: 26, name: "Session 26"),
+  const Session(id: 27, name: "Session 27"),
+  const Session(id: 28, name: "Session 28"),
+  const Session(id: 29, name: "Session 29"),
+  const Session(id: 30, name: "Session 30"),
 ];

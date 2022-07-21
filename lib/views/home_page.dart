@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rehab/models/session.dart';
+import 'package:rehab/themes/app_size.dart';
 
 import '../view_models/session_activity_vm.dart';
 
@@ -12,89 +13,106 @@ class HomePage extends StatelessWidget {
     final controller = Get.put(SessionActivityVM());
     // var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(70),
-        child: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.white,
-          title: Container(
-            padding: const EdgeInsets.only(top: 5),
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const Text(
-                  'Good Morning',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black54,
-                      fontSize: 25),
-                ),
-                const Text(
-                  'Jane',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black54,
-                      fontSize: 25),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-      body: Container(
-        // color: Colors.grey[500],
-        margin: const EdgeInsets.only(left: 40, right: 20, top: 60),
-        child: ListView.builder(
-          itemCount: sessions.length,
-          itemBuilder: (context, index) => GetBuilder<SessionActivityVM>(
-            // specify type as Controller
-            init: SessionActivityVM(), // intialize with the Controller
-            builder: (value) => Container(
-              height: 150,
+      body: ListView.builder(
+        itemCount: sessions.length,
+        itemBuilder: (context, index) => GetBuilder<SessionActivityVM>(
+          // specify type as Controller
+          init: SessionActivityVM(), // intialize with the Controller
+          // builder: (value) => ListTile(
+          //   // screenSize: screenSize,
+          //   title: Text(sessions[index].name),
+          //   subtitle: Text(
+          //       value.lst.contains(sessions[index]) ? "completed" : "start"),
+          //   onTap: controller.lst.contains(sessions[index])
+          //       ? null
+          //       : () => controller.add(),
+          // ),
+          builder: (value) => GestureDetector(
+              onTap: controller.lst.contains(sessions[index])
+                  ? null
+                  : () => controller.add(),
               child: Card(
-                elevation: 8,
-                child: ListTile(
-                  // screenSize: screenSize,
-                  title: Text(
-                    sessions[index].name,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.blue[800],
-                      borderRadius: BorderRadius.circular(12),
+                child: Row(
+                  children: [
+                    CardContent(session: sessions[index]),
+                    Icon(
+                      Icons.play_arrow_rounded,
+                      size: 200,
                     ),
-                    padding: EdgeInsets.all(2),
-                    child: Text(
-                      value.lst.contains(sessions[index])
-                          ? "Completed"
-                          : "Start",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                  // onTap: controller.lst.contains(sessions[index])
-                  //     ? null
-                  //     : () => controller.add(),
+                  ],
                 ),
-              ),
-            ),
-          ),
+              )),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Container(
-        height: 80,
+      floatingActionButton: SizedBox(
+        height: 60,
         width: 300,
         child: FloatingActionButton.extended(
           backgroundColor: Colors.blue[800],
-          icon: Icon(Icons.play_arrow),
+          icon: const Icon(
+            Icons.play_arrow_rounded,
+            size: Dimens.iconSize,
+          ),
           label: Text(
             'Start Session',
-            style: TextStyle(color: Colors.white),
+            style: Theme.of(context)
+                .textTheme
+                .headline3
+                ?.copyWith(color: Colors.white),
           ),
           onPressed: () => controller.add(),
         ),
       ),
+    );
+  }
+}
+
+class CardContent extends StatelessWidget {
+  final Session session;
+  const CardContent({
+    Key? key,
+    required this.session,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Text(
+          session.name,
+          style: Theme.of(context).textTheme.headline2,
+        ),
+        Text(
+          "Mon/Thu/Sat",
+          style: Theme.of(context).textTheme.subtitle2,
+        ),
+        Text(
+          "3 sessions per day",
+          style: Theme.of(context).textTheme.subtitle2,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: Dimens.marginM),
+          child: Container(
+            padding: const EdgeInsets.all(Dimens.marginM),
+            color: const Color.fromARGB(255, 216, 248, 135),
+            child: Text(
+              "Left Shoulder",
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+          ),
+        ),
+        Text(
+          "Assigned by",
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        Text(
+          "Jane Doe",
+          style: Theme.of(context).textTheme.bodyText1,
+        ),
+      ],
     );
   }
 }

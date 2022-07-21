@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter/src/foundation/key.dart';
-// import 'package:flutter/src/widgets/framework.dart';
 import 'package:rehab/views/home_page.dart';
 import 'package:rehab/views/practice_page.dart';
-import 'package:rehab/views/profile.dart';
+import 'package:rehab/views/profile_page.dart';
 import 'package:rehab/views/rehab_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -18,7 +16,7 @@ class _MainPageState extends State<MainPage> {
     const HomePage(),
     const RehabPage(),
     const PracticePage(),
-    const Profile(),
+    const ProfilePage(),
   ];
   int currentindex = 0;
   void onTap(int index) {
@@ -38,7 +36,7 @@ class _MainPageState extends State<MainPage> {
           selectedItemColor: Colors.black,
           unselectedItemColor: Colors.grey,
           showUnselectedLabels: true,
-          items: [
+          items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home_filled),
               label: 'Home',
