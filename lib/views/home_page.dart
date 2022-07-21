@@ -17,26 +17,32 @@ class HomePage extends StatelessWidget {
         itemCount: sessions.length,
         itemBuilder: (context, index) => GetBuilder<SessionActivityVM>(
           init: SessionActivityVM(),
-          builder: (value) => GestureDetector(
-              onTap: controller.lst.contains(sessions[index])
-                  ? null
-                  : () => controller.add(),
-              child: Card(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    CardContent(
-                      session: sessions[index],
-                      done: controller.lst.contains(sessions[index]),
-                      current: controller.lst.last == sessions[index],
+          builder: (value) => !value.loaded
+              ? const SizedBox(
+                  height: 0,
+                )
+              : GestureDetector(
+                  onTap: controller.lst.values.contains(sessions[index])
+                      ? null
+                      : () => controller.add(),
+                  child: Card(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        CardContent(
+                          session: sessions[index],
+                          done: controller.lst.values.contains(sessions[index]),
+                          current:
+                              controller.lst.values.last == sessions[index],
+                        ),
+                        const Icon(
+                          Icons.play_arrow_rounded,
+                          size: 200,
+                        ),
+                      ],
                     ),
-                    const Icon(
-                      Icons.play_arrow_rounded,
-                      size: 200,
-                    ),
-                  ],
+                  ),
                 ),
-              )),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
