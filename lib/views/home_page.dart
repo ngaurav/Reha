@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rehab/models/session.dart';
@@ -13,37 +15,168 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(SessionActivityVM());
     return Scaffold(
-      body: ListView.builder(
-        itemCount: sessions.length,
-        itemBuilder: (context, index) => GetBuilder<SessionActivityVM>(
-          init: SessionActivityVM(),
-          builder: (value) => !value.loaded
-              ? const SizedBox(
-                  height: 0,
-                )
-              : GestureDetector(
-                  onTap: controller.lst.values.contains(sessions[index])
-                      ? null
-                      : () => controller.add(),
-                  child: Card(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        CardContent(
-                          session: sessions[index],
-                          done: controller.lst.values.contains(sessions[index]),
-                          current:
-                              controller.lst.values.last == sessions[index],
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              height: 150,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Card(
+                elevation: 10,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Today's Progress",
+                            style: TextStyle(
+                              color: Colors.grey[700],
+                              fontSize: 30,
+                            ),
+                          ),
+                          Text(
+                            "50%",
+                            style: TextStyle(
+                                color: Colors.blue[800],
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: LinearProgressIndicator(
+                          minHeight: 8,
+                          value: 0.5,
+                          // value: controller.value,
+                          semanticsLabel: 'Linear progress indicator',
                         ),
-                        const Icon(
-                          Icons.play_arrow_rounded,
-                          size: 200,
-                        ),
-                      ],
-                    ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.all(5),
+                                padding: EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    border: Border.all(
+                                        width: 1, color: Colors.white)),
+                                child: Icon(
+                                  Icons.check_box,
+                                  color: Colors.green,
+                                  size: 35,
+                                ),
+                              ),
+                              Column(
+                                children: [
+                                  Text("Completed"),
+                                  Text(
+                                    '2 Sessions',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.all(5),
+                                padding: EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    border: Border.all(
+                                        width: 1, color: Colors.white)),
+                                child: Icon(
+                                  Icons.arrow_circle_right,
+                                  color: Colors.blue,
+                                  size: 35,
+                                ),
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Pending'),
+                                  Text(
+                                    '2 Sessions',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-        ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: sessions.length,
+              itemBuilder: (context, index) => GetBuilder<SessionActivityVM>(
+                init: SessionActivityVM(),
+                builder: (value) => !value.loaded
+                    ? const SizedBox(
+                        height: 0,
+                      )
+                    : GestureDetector(
+                        onTap: controller.lst.values.contains(sessions[index])
+                            ? null
+                            : () => controller.add(),
+                        child: Card(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(left: 20.0, right: 5),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                CardContent(
+                                  session: sessions[index],
+                                  done: controller.lst.values
+                                      .contains(sessions[index]),
+                                  current: controller.lst.values.last ==
+                                      sessions[index],
+                                ),
+                                Container(
+                                    margin: EdgeInsets.all(5),
+                                    padding: EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white54,
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(
+                                            width: 1, color: Colors.green)),
+                                    // child: Icon(
+                                    //   Icons.hiking_outlined,
+                                    //   color: Colors.pink[100],
+                                    //   size: 100,
+                                    // ),
+                                    child: Image(
+                                      image: AssetImage("assets/exercise.jpg"),
+                                      height: 100,
+                                    )),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+              ),
+            ),
+          ),
+        ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: SizedBox(

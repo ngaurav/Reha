@@ -11,113 +11,115 @@ class RehabPage extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: Dimens.marginXL,
-                  top: Dimens.marginXL,
-                  bottom: Dimens.marginM),
-              child: Text(
-                "Rehab Programme",
-                style: AppTheme.textTheme.headline2,
-              ),
-            ),
-            const BannerView(picture: "assets/image_01.png"),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: Dimens.marginXL,
-                      top: Dimens.marginL,
-                      bottom: Dimens.marginM),
-                  child: Text(
-                    "History",
-                    style: AppTheme.textTheme.headline3,
-                  ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: Dimens.marginXL,
+                    top: Dimens.marginXL,
+                    bottom: Dimens.marginM),
+                child: Text(
+                  "Rehab Programme",
+                  style: AppTheme.textTheme.headline2,
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: Dimens.marginXL),
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.filter_alt,
-                      size: Dimens.iconSize,
+              ),
+              const BannerView(picture: "assets/image_01.png"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: Dimens.marginXL,
+                        top: Dimens.marginL,
+                        bottom: Dimens.marginM),
+                    child: Text(
+                      "History",
+                      style: AppTheme.textTheme.headline3,
                     ),
-                    onPressed: null,
                   ),
-                )
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: Dimens.marginXL,
-                vertical: Dimens.marginS,
-              ),
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.grey,
-                  borderRadius: Dimens.border,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(Dimens.marginS),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Column(
-                        children: [
-                          Text(
-                            "Total Sessions",
-                            style: AppTheme.textTheme.caption,
-                          ),
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.filter_alt,
-                              ),
-                              Text(
-                                "16",
-                                style: AppTheme.textTheme.subtitle1,
-                              ),
-                            ],
-                          ),
-                        ],
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: Dimens.marginXL),
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.filter_alt,
+                        size: Dimens.iconSize,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(Dimens.marginS),
-                        child: Container(
-                          width: 2,
-                          height: Dimens.iconSize,
-                          color: Colors.black54,
+                      onPressed: null,
+                    ),
+                  )
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: Dimens.marginXL,
+                  vertical: Dimens.marginS,
+                ),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: Dimens.border,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(Dimens.marginS),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              "Total Sessions",
+                              style: AppTheme.textTheme.caption,
+                            ),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.fitness_center,
+                                ),
+                                Text(
+                                  "16",
+                                  style: AppTheme.textTheme.subtitle1,
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                      ),
-                      Column(
-                        children: [
-                          Text(
-                            "Total Sessions",
-                            style: AppTheme.textTheme.caption,
+                        Padding(
+                          padding: const EdgeInsets.all(Dimens.marginS),
+                          child: Container(
+                            width: 2,
+                            height: Dimens.iconSize,
+                            color: Colors.black54,
                           ),
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.filter_alt,
-                              ),
-                              Text(
-                                "16",
-                                style: AppTheme.textTheme.subtitle1,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                              "Total Time",
+                              style: AppTheme.textTheme.caption,
+                            ),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.timelapse,
+                                ),
+                                Text(
+                                  "16",
+                                  style: AppTheme.textTheme.subtitle1,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            TableRow()
-          ],
+              TableRow()
+            ],
+          ),
         ),
       ),
     );
@@ -136,20 +138,308 @@ class TableRow extends StatelessWidget {
         horizontal: Dimens.marginXL,
         vertical: Dimens.marginS,
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Icon(
-                Icons.filter_alt,
+              Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.all(0),
+                    padding: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(width: 1, color: Colors.grey)),
+                    child: Icon(
+                      Icons.hiking,
+                      color: Colors.green,
+                      size: 45,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    children: [
+                      const Icon(
+                        Icons.punch_clock_outlined,
+                      ),
+                      const Icon(
+                        Icons.calendar_month,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Column(
+                    children: [
+                      Text("10:20 am"),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text("20-10-20")
+                    ],
+                  ),
+                ],
               ),
-              Column(
-                children: [Text("data"), Text("data")],
-              ),
+              Text("View Results")
             ],
           ),
-          Text("data")
+          SizedBox(
+            height: 5,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.all(0),
+                    padding: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(width: 1, color: Colors.grey)),
+                    child: Icon(
+                      Icons.rowing,
+                      color: Colors.blue,
+                      size: 45,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    children: [
+                      const Icon(
+                        Icons.punch_clock_outlined,
+                      ),
+                      const Icon(
+                        Icons.calendar_month,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Column(
+                    children: [
+                      Text("10:20 am"),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text("20-10-20")
+                    ],
+                  ),
+                ],
+              ),
+              Text("View Results")
+            ],
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.all(0),
+                    padding: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(width: 1, color: Colors.grey)),
+                    child: Icon(
+                      Icons.hiking,
+                      color: Colors.green,
+                      size: 45,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    children: [
+                      const Icon(
+                        Icons.punch_clock_outlined,
+                      ),
+                      const Icon(
+                        Icons.calendar_month,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Column(
+                    children: [
+                      Text("10:20 am"),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text("20-10-20")
+                    ],
+                  ),
+                ],
+              ),
+              Text("View Results")
+            ],
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.all(0),
+                    padding: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(width: 1, color: Colors.grey)),
+                    child: Icon(
+                      Icons.rowing,
+                      color: Colors.blue,
+                      size: 45,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    children: [
+                      const Icon(
+                        Icons.punch_clock_outlined,
+                      ),
+                      const Icon(
+                        Icons.calendar_month,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Column(
+                    children: [
+                      Text("10:20 am"),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text("20-10-20")
+                    ],
+                  ),
+                ],
+              ),
+              Text("View Results")
+            ],
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.all(0),
+                    padding: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(width: 1, color: Colors.grey)),
+                    child: Icon(
+                      Icons.hiking,
+                      color: Colors.green,
+                      size: 45,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    children: [
+                      const Icon(
+                        Icons.punch_clock_outlined,
+                      ),
+                      const Icon(
+                        Icons.calendar_month,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Column(
+                    children: [
+                      Text("10:20 am"),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text("20-10-20")
+                    ],
+                  ),
+                ],
+              ),
+              Text("View Results")
+            ],
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.all(0),
+                    padding: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(width: 1, color: Colors.grey)),
+                    child: Icon(
+                      Icons.rowing,
+                      color: Colors.blue,
+                      size: 45,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    children: [
+                      const Icon(
+                        Icons.punch_clock_outlined,
+                      ),
+                      const Icon(
+                        Icons.calendar_month,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Column(
+                    children: [
+                      Text("10:20 am"),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text("20-10-20")
+                    ],
+                  ),
+                ],
+              ),
+              Text("View Results")
+            ],
+          ),
+          SizedBox(
+            height: 5,
+          ),
         ],
       ),
     );
