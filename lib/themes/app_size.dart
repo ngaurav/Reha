@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 class Dimens {
   Dimens._();
   static const double radius = 8;
+  static const double marginXS = 4;
   static const double marginS = 8;
   static const double marginM = 12;
   static const double marginL = 18;
@@ -10,4 +11,5 @@ class Dimens {
   static const double iconSize = 36;
 
   static const border = BorderRadius.all(Radius.circular(radius));
+  static const largeBorder = BorderRadius.all(Radius.circular(marginXL));
 }

@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 class AppTheme {
   AppTheme._();
 
+  static const Color purple = Color.fromARGB(255, 148, 156, 240);
+  static const Color lightPink = Color.fromARGB(255, 207, 135, 248);
+  static const Color amber = Color.fromARGB(255, 210, 165, 3);
+  static const Color inactiveBlue = Color.fromARGB(255, 116, 170, 214);
+
   static const TextTheme textTheme = TextTheme(
       headline1: TextStyle(
           fontSize: 34, fontWeight: FontWeight.w400, letterSpacing: 0),
