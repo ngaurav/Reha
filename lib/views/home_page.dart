@@ -65,7 +65,7 @@ class HomePage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Today's Progress",
+                                "Progress",
                                 style: TextStyle(
                                   color: Colors.grey[700],
                                   fontSize: 30,
